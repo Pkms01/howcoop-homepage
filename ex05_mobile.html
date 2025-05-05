@@ -1,0 +1,290 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HOWCOOP Mobile Prototype v0.1</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      background: #f2f2f2;
+      overflow-x: hidden;
+    }
+
+    .wrapper {
+      transition: transform 0.3s ease;
+      position: relative;
+      z-index: 1;
+    }
+
+    .wrapper.shifted {
+      transform: translateX(250px);
+    }
+
+    .navbar, .footer {
+      background-color: #1e3a8a;
+      color: white;
+      padding: 14px 20px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .menu-btn {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: -250px;
+      width: 250px;
+      height: 100%;
+      background: #fff;
+      box-shadow: 2px 0 5px rgba(0,0,0,0.2);
+      padding: 20px;
+      transition: left 0.3s ease;
+      z-index: 5;
+    }
+
+    .sidebar.active { left: 0; }
+    .sidebar h3 { margin-bottom: 10px; }
+    .sidebar ul { list-style: none; }
+    .sidebar ul li {
+      padding: 10px 0;
+      border-bottom: 1px solid #eee;
+      cursor: pointer;
+    }
+
+    .content-section { display: none; padding: 16px; padding-bottom: 60px; }
+    .content-section.active { display: block; }
+
+    .footer {
+      display: flex;
+      justify-content: space-around;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      z-index: 10;
+    }
+
+    .footer a {
+      color: white;
+      text-decoration: none;
+      font-size: 14px;
+      padding: 10px;
+    }
+
+    /* 공지사항 카드 */
+    .notice-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 14px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    .notice-date { font-size: 12px; color: #888; margin-bottom: 6px; }
+    .notice-title { font-size: 16px; font-weight: bold; margin-bottom: 6px; }
+    .badge {
+      display: inline-block;
+      background: #ff4d4f;
+      color: white;
+      font-size: 11px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-left: 6px;
+    }
+    .notice-desc { font-size: 14px; color: #666; }
+    .readmore {
+      display: block;
+      text-align: right;
+      margin-top: 8px;
+      font-size: 13px;
+      color: #1e3a8a;
+      text-decoration: none;
+    }
+
+    /* 마이페이지 */
+    .course-box {
+      background: #fff;
+      border-radius: 10px;
+      padding: 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.06);
+    }
+
+    .course-title {
+      font-size: 16px;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    .progress {
+      height: 10px;
+      background: #ddd;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: #2563eb;
+    }
+
+    .status {
+      margin-top: 8px;
+      font-size: 13px;
+      color: #444;
+    }
+
+    /* 강의 상세 */
+    .header-img {
+      background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGNgYAAAAAMAAWgmWQ0AAAAASUVORK5CYII=') center/cover no-repeat;
+      height: 200px;
+    }
+
+    .tag {
+      display: inline-block;
+      background: #2563eb;
+      color: white;
+      font-size: 12px;
+      padding: 4px 8px;
+      border-radius: 4px;
+      margin-right: 6px;
+    }
+
+    .desc {
+      font-size: 14px;
+      color: #555;
+      margin: 16px 0;
+    }
+
+    .apply-btn {
+      display: block;
+      width: 100%;
+      text-align: center;
+      padding: 12px;
+      background: #0d9488;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="sidebar" class="sidebar">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+      <h3>사회연대경제교육원</h3>
+      <button onclick="toggleSidebar()" style="border:none; background:none; font-size:18px; cursor:pointer;">✕</button>
+    </div>
+    <hr style="margin:10px 0; border:0; height:1px; background:#eee;">
+    <ul>
+      <li onclick="showSection('courses')">📘 강의</li>
+      <li onclick="showSection('notice')">📢 공지사항</li>
+      <li onclick="showSection('mypage')">👤 마이페이지</li>
+    </ul>
+    
+    <h3>메뉴</h3>
+    <ul>
+      <li onclick="showSection('courses')">강의</li>
+      <li onclick="showSection('notice')">공지사항</li>
+      <li onclick="showSection('mypage')">마이페이지</li>
+    </ul>
+  </div>
+
+  <div id="wrapper" class="wrapper">
+    <div class="navbar">
+      <span>사회연대경제교육원</span>
+      <button class="menu-btn" onclick="toggleSidebar()">☰</button>
+    </div>
+
+    <div id="courses" class="content-section active">
+      <div class="header-img"></div>
+      <div style="padding: 20px;">
+        <div class="course-title">[HOWCOOP] 협동조합 설립 실무 과정</div>
+        <div>
+          <span class="tag">기초</span>
+          <span class="tag">운영</span>
+          <span class="tag">설립</span>
+        </div>
+        <div class="desc">
+          협동조합을 처음 설립하고자 하는 분들을 위한 입문 강좌입니다.
+          설립 절차, 필요 서류, 법적 요건 등 실무 중심의 내용을 제공합니다.
+        </div>
+        <button class="apply-btn">지금 신청하기</button>
+      </div>
+    </div>
+
+    <div id="notice" class="content-section">
+      <h3 style="padding: 10px;">공지사항</h3>
+      <div class="notice-card">
+        <div class="notice-date">2025.05.03</div>
+        <div class="notice-title">5월 강의 일정 안내 <span class="badge">NEW</span></div>
+        <div class="notice-desc">이번 달 예정된 주요 강의 일정을 확인해보세요.</div>
+        <a href="#" class="readmore">자세히 보기 →</a>
+      </div>
+      <div class="notice-card">
+        <div class="notice-date">2025.04.29</div>
+        <div class="notice-title">시스템 점검 안내</div>
+        <div class="notice-desc">5월 초 예정된 시스템 점검 일정을 안내드립니다.</div>
+        <a href="#" class="readmore">자세히 보기 →</a>
+      </div>
+    </div>
+
+    <div id="mypage" class="content-section">
+      <h3 style="padding: 10px;">마이페이지</h3>
+      <div class="course-box">
+        <div class="course-title">협동조합 설립 실무 <span class="badge">진행 중</span></div>
+        <div class="progress"><div class="progress-bar" style="width: 60%;"></div></div>
+        <div class="status">진도율: 60%</div>
+      </div>
+      <div class="course-box">
+        <div class="course-title">사회적경제 개론 <span class="badge" style="background:#475569;">수료</span></div>
+        <div class="progress"><div class="progress-bar" style="width: 100%; background:#475569;"></div></div>
+        <div class="status">진도율: 100%</div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <a onclick="showSection('courses')">강의</a>
+      <a onclick="showSection('notice')">공지</a>
+      <a onclick="showSection('mypage')">마이페이지</a>
+    </div>
+  </div>
+
+  <script>
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      const wrapper = document.getElementById('wrapper');
+      sidebar.classList.toggle('active');
+      wrapper.classList.toggle('shifted');
+    }
+
+    function showSection(id) {
+      document.querySelectorAll('.content-section').forEach(sec => sec.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      document.getElementById('sidebar').classList.remove('active');
+      document.getElementById('wrapper').classList.remove('shifted');
+    }
+  </script>
+</body>
+</html>
