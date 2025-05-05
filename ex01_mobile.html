@@ -1,0 +1,211 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>하우쿱 | 협동조합 설립 지원</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      background: #f4f4f4;
+      overflow-x: hidden;
+    }
+    .navbar {
+      background-color: #1e88e5;
+      color: white;
+      padding: 14px 20px;
+      font-size: 18px;
+      font-weight: bold;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .menu-btn {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+    }
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: -250px;
+      width: 250px;
+      height: 100%;
+      background: #fff;
+      box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+      padding: 20px;
+      transition: left 0.3s ease;
+      z-index: 20;
+    }
+    .sidebar.active { left: 0; }
+    .sidebar ul { list-style: none; }
+    .sidebar ul li {
+      padding: 12px 0;
+      font-size: 14px;
+      border-bottom: 1px solid #eee;
+      color: #333;
+    }
+    .content-section {
+      padding: 20px;
+      padding-bottom: 70px;
+    }
+    h2 {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    p {
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 16px;
+    }
+    .notice-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 14px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+    .notice-title {
+      font-size: 16px;
+      font-weight: bold;
+    }
+    .notice-desc {
+      font-size: 13px;
+      color: #555;
+      margin-top: 4px;
+    }
+    .readmore {
+      display: inline-block;
+      margin-top: 8px;
+      font-size: 13px;
+      color: #1e88e5;
+      text-decoration: none;
+    }
+    .apply-btn {
+      width: 100%;
+      padding: 12px;
+      font-size: 14px;
+      background-color: #1e88e5;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      margin-top: 16px;
+      cursor: pointer;
+    }
+    .apply-btn:hover {
+      background-color: #166bbd;
+    }
+    .footer {
+      background-color: #1e88e5;
+      color: white;
+      display: flex;
+      justify-content: space-around;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      padding: 12px 0;
+      font-size: 13px;
+      z-index: 10;
+    }
+    .footer a {
+      color: white;
+      text-decoration: none;
+      text-align: center;
+    }
+    .footer a.active {
+      font-weight: bold;
+      text-decoration: underline;
+    }
+    .toast {
+      position: fixed;
+      bottom: 80px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #333;
+      color: white;
+      padding: 10px 16px;
+      border-radius: 6px;
+      font-size: 13px;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      z-index: 50;
+    }
+    .toast.show {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+
+<div class="navbar" role="banner">
+  하우쿱 플랫폼
+  <button class="menu-btn" aria-label="메뉴 열기" onclick="toggleSidebar()">☰</button>
+</div>
+
+<nav id="sidebar" class="sidebar" role="navigation" aria-label="주 메뉴">
+  <ul>
+    <li>메인</li>
+    <li>설립 지원</li>
+    <li>교육 프로그램</li>
+    <li>전문가 상담</li>
+    <li>네트워크</li>
+    <li>공지사항</li>
+    <li>마이페이지</li>
+  </ul>
+</nav>
+
+<main class="content-section" role="main">
+  <h2>협동조합 설립 지원</h2>
+  <p>하우쿱은 협동조합 설립 절차부터 필요 서류, 전문가 상담까지 전 과정을 지원합니다.</p>
+
+  <section class="notice-card" role="region" aria-labelledby="step1">
+    <div class="notice-title" id="step1">1단계: 자가진단</div>
+    <div class="notice-desc">당신의 설립 준비 상태를 확인해보세요.</div>
+    <a href="#" class="readmore">체크리스트 바로가기 →</a>
+  </section>
+
+  <section class="notice-card" role="region" aria-labelledby="step2">
+    <div class="notice-title" id="step2">2단계: 설립 자료 다운로드</div>
+    <div class="notice-desc">정관, 창립총회 서식 등 주요 서류를 내려받을 수 있습니다.</div>
+    <a href="#" class="readmore">자료실 이동 →</a>
+  </section>
+
+  <section class="notice-card" role="region" aria-labelledby="step3">
+    <div class="notice-title" id="step3">3단계: 전문가 상담 신청</div>
+    <div class="notice-desc">전문가와 함께 맞춤형 설립 코칭을 받아보세요.</div>
+    <a href="#" class="readmore">상담 신청하기 →</a>
+  </section>
+
+  <button class="apply-btn" onclick="showToast()">전체 설립 절차 보기</button>
+</main>
+
+<div class="footer" role="contentinfo">
+  <a href="#">메인</a>
+  <a href="#">공지</a>
+  <a href="#" class="active">설립</a>
+  <a href="#">마이페이지</a>
+</div>
+
+<div id="toast" class="toast" role="status" aria-live="polite">준비 중입니다</div>
+
+<script>
+  function toggleSidebar() {
+    document.getElementById("sidebar").classList.toggle("active");
+  }
+  function showToast() {
+    const toast = document.getElementById("toast");
+    toast.classList.add("show");
+    setTimeout(() => toast.classList.remove("show"), 2000);
+  }
+</script>
+
+</body>
+</html>

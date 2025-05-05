@@ -1,0 +1,57 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HOWCOOP | 스크롤 탭 메뉴</title>
+  <style>
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      margin: 0;
+      background: #f8f8f8;
+    }
+    .scroll-tabs {
+      display: flex;
+      overflow-x: auto;
+      white-space: nowrap;
+      border-bottom: 1px solid #ccc;
+      background: #fff;
+    }
+    .scroll-tabs button {
+      padding: 12px 20px;
+      border: none;
+      background: none;
+      font-size: 14px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .scroll-tabs button.active {
+      border-bottom: 2px solid #1e88e5;
+      color: #1e88e5;
+      font-weight: bold;
+    }
+    .content {
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="scroll-tabs">
+  <button class="active">전체</button>
+  <button>설립지원</button>
+  <button>교육</button>
+  <button>상담</button>
+  <button>정책</button>
+  <button>네트워크</button>
+  <button>자료실</button>
+</div>
+
+<div class="content">
+  <h2>카테고리 콘텐츠</h2>
+  <p>스와이프 가능하고 키워드별로 전환되는 탭 UI입니다. 뉴스/블로그/강의 탭 등에서 주로 사용됩니다.</p>
+</div>
+
+</body>
+</html>

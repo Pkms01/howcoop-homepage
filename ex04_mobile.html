@@ -1,0 +1,112 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HOWCOOP | Hybrid Mobile UI</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Noto Sans KR', sans-serif;
+      background: #f8f8f8;
+    }
+    main {
+      padding: 20px;
+      padding-bottom: 80px;
+    }
+    .header {
+      background-color: #1e88e5;
+      color: white;
+      padding: 14px 20px;
+      font-size: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .menu-btn {
+      font-size: 22px;
+      background: none;
+      color: white;
+      border: none;
+    }
+    .overlay-menu {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.85);
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+    }
+    .overlay-menu.active {
+      display: flex;
+    }
+    .overlay-menu a {
+      color: white;
+      font-size: 18px;
+      margin: 12px 0;
+      text-decoration: none;
+    }
+    .tab-footer {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      height: 60px;
+      background: #fff;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      border-top: 1px solid #ccc;
+      z-index: 10;
+    }
+    .tab-footer a {
+      text-decoration: none;
+      font-size: 13px;
+      color: #444;
+      text-align: center;
+    }
+    .tab-footer a.active {
+      font-weight: bold;
+      color: #1e88e5;
+    }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  하우쿱 플랫폼
+  <button class="menu-btn" aria-label="전체 메뉴 열기" onclick="toggleMenu()">☰</button>
+</div>
+
+<main>
+  <h2>설립 지원</h2>
+  <p>하우쿱은 협동조합 설립 절차부터 필요 서류, 전문가 상담까지 전 과정을 지원합니다.</p>
+</main>
+
+<div id="overlay" class="overlay-menu" role="menu">
+  <a href="#">전문가 상담</a>
+  <a href="#">네트워크</a>
+  <a href="#">공지사항</a>
+  <a href="#">자료실</a>
+  <a href="#">정책 활동</a>
+  <a href="#" onclick="toggleMenu()">닫기</a>
+</div>
+
+<div class="tab-footer">
+  <a href="#">홈</a>
+  <a href="#" class="active">설립지원</a>
+  <a href="#">교육</a>
+  <a href="#">마이</a>
+</div>
+
+<script>
+function toggleMenu() {
+  document.getElementById("overlay").classList.toggle("active");
+}
+</script>
+
+</body>
+</html>

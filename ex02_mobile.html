@@ -1,0 +1,68 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HOWCOOP | 드롭다운 메뉴</title>
+  <style>
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      margin: 0;
+    }
+    .top-nav {
+      background: #1e88e5;
+      color: white;
+      padding: 14px 20px;
+      position: relative;
+    }
+    .dropdown {
+      position: absolute;
+      top: 50px;
+      left: 20px;
+      background: white;
+      border: 1px solid #ddd;
+      display: none;
+      flex-direction: column;
+      min-width: 160px;
+      z-index: 10;
+    }
+    .dropdown a {
+      padding: 10px;
+      text-decoration: none;
+      color: #333;
+      background: #fff;
+      border-bottom: 1px solid #eee;
+    }
+    .dropdown a:hover {
+      background: #f0f0f0;
+    }
+    .dropdown-toggle {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="top-nav">
+  하우쿱
+  <button class="dropdown-toggle" onclick="document.getElementById('menu').style.display='flex'">메뉴 ▼</button>
+</div>
+
+<div id="menu" class="dropdown">
+  <a href="#">설립 지원</a>
+  <a href="#">교육 프로그램</a>
+  <a href="#">전문가 상담</a>
+  <a href="#">네트워크</a>
+</div>
+
+<main style="padding: 20px;">
+  <h2>상단 드롭다운 메뉴 예시</h2>
+  <p>항목이 적을 경우 빠르게 접근 가능한 방식입니다.</p>
+</main>
+
+</body>
+</html>
