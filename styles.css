@@ -1,0 +1,154 @@
+:root {
+  --primary-color: #3498db;
+  --secondary-color: #e67e22;
+  --text-color: #2c3e50;
+  --bg-light: #f9f9f9;
+}
+
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  margin: 0;
+  color: var(--text-color);
+  background: #fff;
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header {
+  background: #fff;
+  border-bottom: 1px solid #eee;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+.header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+}
+
+.logo {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+}
+
+.nav a {
+  text-decoration: none;
+  color: var(--text-color);
+  font-weight: 500;
+}
+
+.nav a:hover {
+  color: var(--primary-color);
+}
+
+.hero {
+  background: var(--bg-light);
+  padding: 6rem 0 3rem;
+}
+
+.hero-content {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  text-align: center;
+}
+
+.hero-text h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.hero-text p {
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  border-radius: 5px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.btn.primary {
+  background: var(--primary-color);
+  color: #fff;
+}
+
+.btn.primary:hover {
+  background: #2980b9;
+}
+
+.btn.secondary {
+  background: var(--secondary-color);
+  color: #fff;
+}
+
+.btn.secondary:hover {
+  background: #d35400;
+}
+
+.hero-image img {
+  max-width: 100%;
+  border-radius: 10px;
+  margin-bottom: 2rem;
+}
+
+.promo {
+  padding: 3rem 0;
+  text-align: center;
+  background: #fff;
+}
+
+.promo h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.promo .subtitle {
+  font-size: 1.3rem;
+  color: var(--text-color);
+  font-weight: 700;
+}
+
+.footer {
+  background: #2c3e50;
+  color: #fff;
+  text-align: center;
+  padding: 1rem 0;
+  font-size: 0.9rem;
+}
+
+/* 반응형 */
+@media (min-width: 768px) {
+  .hero-content {
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+  }
+
+  .hero-text {
+    flex: 1;
+    padding-right: 2rem;
+  }
+
+  .hero-image {
+    flex: 1;
+  }
+}
